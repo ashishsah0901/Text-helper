@@ -4,8 +4,9 @@ import PropTypes from "prop-types";
 export default function NavBar(props) {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}>
         <div className="container-fluid">
+          <img className="mx-2" src="../../favicon.ico" height="25vw" alt="/" />
           <a className="navbar-brand" href="/">
             {props.title}
           </a>
@@ -33,17 +34,10 @@ export default function NavBar(props) {
                 </a>
               </li>
             </ul>
-            <form className="d-flex">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button className="btn btn-outline-success" type="submit">
-                Search
-              </button>
-            </form>
+          </div>
+          <div className="form-check form-switch">
+            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onClick={props.toggleDark} />
+            <label className={`form-check-label text-${props.mode === 'light' ? 'dark' : 'light'}`} htmlFor="flexSwitchCheckDefault">Dark Mode</label>
           </div>
         </div>
       </nav>
@@ -55,10 +49,12 @@ NavBar.propTypes = {
   title: PropTypes.string.isRequired,
   firstElement: PropTypes.string.isRequired,
   secondElement: PropTypes.string,
+  mode: PropTypes.string.isRequired,
 };
 
 NavBar.defaultProps = {
   title: "Navbar title",
   firstElement: "element 1",
   secondElement: "element 2",
+  mode: 'light'
 };
