@@ -1,9 +1,14 @@
 import "./App.css";
-// import About from "./components/About";
+import About from "./components/About";
 import Form from "./components/Form";
 import NavBar from "./components/NavBar";
 import React, { useState } from 'react'
 import Alert from "./components/Alert";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 
 function App() {
   const [darkMode, setDarkMode] = useState('light');
@@ -18,25 +23,30 @@ function App() {
       setAlert(null)
     }, 1000);
   }
-  const toggleMode = () => {
-    if (darkMode === 'light') {
-      setDarkMode('dark')
-      document.body.style.backgroundColor = '#343a40'
-      showAlert("Dark mode enabled", 'success')
-    } else {
-      setDarkMode('light')
-      document.body.style.backgroundColor = 'white'
-      showAlert("Light mode enabled", 'success')
-    }
+  const toggleTitle = (page) => {
+    document.title = `Text-Helper - ${page}`
+  }
+  const toggleMode = (color) => {
+    setDarkMode(color)
+    document.body.style.backgroundColor = color
+    showAlert(`${color} mode enabled`, 'success')
   }
   return (
     <>
-      <NavBar title="Text-Helper" firstElement="Home" secondElement="About" mode={darkMode} toggleDark={toggleMode} />
-      <Alert alert={alert} />
-      <div className="container">
-        <Form title="Enter text here to work on it..." alert={showAlert} result="Your text result" mode={darkMode} />
-        {/* <About title="About text helper" mode={darkMode} /> */}
-      </div>
+      <Router>
+        <NavBar title="Text-Helper" firstElement="Home" secondElement="About" mode={darkMode} toggleDark={toggleMode} changeTitle={toggleTitle} />
+        <Alert alert={alert} />
+        <div className="container">
+          <Switch>
+            <Route exact path="/About">
+              <About title="About text helper" mode={darkMode} />
+            </Route>
+            <Route exact path="/">
+              <Form title="Enter text here to work on it..." alert={showAlert} result="Your text result" mode={darkMode} />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
     </>
   );
 }

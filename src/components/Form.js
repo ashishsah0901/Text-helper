@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 
 
 export default function Form(props) {
+  let mStyle = {
+    color: (props.mode === "Green" || props.mode === "Blue" || props.mode === "Black") ? "white" : "black"
+  }
   const [text, setText] = useState("");
   const convertToUppercase = () => {
     if (text.trim() === "") {
@@ -79,10 +82,10 @@ export default function Form(props) {
   }
   return (
     <>
-      <div className={`container my-3 text-${props.mode === 'light' ? 'dark' : 'light'}`}>
+      <div className="container my-3" style={mStyle}>
         <h3>{props.title}</h3>
         <div className="mb-3">
-          <textarea style={{ backgroundColor: props.mode !== 'light' ? '#343a40' : 'white', color: props.mode !== 'light' ? 'white' : 'black' }} className="form-control" onChange={handleOnTextAreaContentChange} id="textBox" value={text} rows="8" ></textarea>
+          <textarea className="form-control" onChange={handleOnTextAreaContentChange} id="textBox" value={text} rows="8" ></textarea>
         </div>
         <button className="btn btn-primary mx-1 my-1" onClick={convertToUppercase}>Convert to uppercase</button>
         <button className="btn btn-primary mx-1 my-1" onClick={convertToLowercase}>Convert to lowercase</button>
@@ -93,9 +96,9 @@ export default function Form(props) {
         <button className="btn btn-primary mx-1 my-1" onClick={convertToParagraph}>Make new line after full stop</button>
         <button className="btn btn-primary mx-1" onClick={clearText}>Clear</button>
       </div>
-      <div className={`container my-3 text-${props.mode === 'light' ? 'dark' : 'light'}`}>
+      <div className="container my-3" style={mStyle}>
         <h3>{props.result}</h3>
-        <p>There are {text.trim().replaceAll("\n", " ").split(" ").filter(i => i !== "").length} words and {text.trim().replaceAll("\n", " ").split(" ").filter(i => i !== "").join("").length} characters in {text.trim()}</p>
+        <p>There are {text.trim().split(/\s+/).filter(i => i !== "").length} words and {text.trim().split(/\s+/).filter(i => i !== "").join("").length} characters in {text.trim()}</p>
         <p>Approximately {text === "" ? 0 : Math.ceil(0.008 * text.trim().replaceAll("\n", " ").split(" ").filter(i => i !== "").length)} minutes read</p>
       </div>
     </>
