@@ -90,6 +90,8 @@ NavBar.propTypes = {
   firstElement: PropTypes.string.isRequired,
   secondElement: PropTypes.string,
   mode: PropTypes.string.isRequired,
+  toggleDark: PropTypes.func.isRequired,
+  changeTitle: PropTypes.func,
 };
 
 NavBar.defaultProps = {

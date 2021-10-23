@@ -9,50 +9,50 @@ export default function Form(props) {
   const [text, setText] = useState("");
   const convertToUppercase = () => {
     if (text.trim() === "") {
-      props.alert("Enter some text", 'warning')
+      props.alert && props.alert("Enter some text", 'warning')
     } else {
       let newText = text.toUpperCase();
       setText(newText);
-      props.alert("Converted to uppercase", 'success')
+      props.alert && props.alert("Converted to uppercase", 'success')
     }
   }
   const convertToLowercase = () => {
     if (text.trim() === "") {
-      props.alert("Enter some text", 'warning')
+      props.alert && props.alert("Enter some text", 'warning')
     } else {
       let newText = text.toLowerCase();
       setText(newText);
-      props.alert("Converted to lowercase", 'success')
+      props.alert && props.alert("Converted to lowercase", 'success')
     }
   }
   const clearText = () => {
     setText("");
-    props.alert("Text cleared", 'success')
+    props.alert && props.alert("Text cleared", 'success')
   }
   const removeExtraSpaces = () => {
     if (text.trim() === "") {
-      props.alert("Enter some text", 'warning')
+      props.alert && props.alert("Enter some text", 'warning')
     } else {
       let newText = text.trim().split(" ").filter(i => i !== "").join(" ")
       setText(newText);
-      props.alert("Extra spaces removed", 'success')
+      props.alert && props.alert("Extra spaces removed", 'success')
     }
   }
   const copyToClipBoard = () => {
     if (text.trim() === "") {
-      props.alert("Enter some text", 'warning')
+      props.alert && props.alert("Enter some text", 'warning')
     } else {
       navigator.clipboard.writeText(text)
-      props.alert("Copied to clipboard", 'success')
+      props.alert && props.alert("Copied to clipboard", 'success')
     }
   }
   const makeTextInOneLine = () => {
     if (text.trim() === "") {
-      props.alert("Enter some text", 'warning')
+      props.alert && props.alert("Enter some text", 'warning')
     } else {
       let newText = text.trim().replaceAll("\n", " ");
       setText(newText);
-      props.alert("Removed new lines", 'success')
+      props.alert && props.alert("Removed new lines", 'success')
     }
   }
   const handleOnTextAreaContentChange = (event) => {
@@ -60,24 +60,24 @@ export default function Form(props) {
   }
   const extractEmail = () => {
     if (text.trim() === "") {
-      props.alert("Enter some text", 'warning')
+      props.alert && props.alert("Enter some text", 'warning')
     } else {
       let newText = text.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/gi);
       if (newText == null) {
-        props.alert("No email fount", 'danger')
+        props.alert && props.alert("No email fount", 'danger')
       } else {
         setText(newText.join("\n"));
-        props.alert("Emails extracted", 'success')
+        props.alert && props.alert("Emails extracted", 'success')
       }
     }
   }
   const convertToParagraph = () => {
     if (text.trim() === "") {
-      props.alert("Enter some text", 'warning')
+      props.alert && props.alert("Enter some text", 'warning')
     } else {
       let nextText = text.trim().replaceAll(".", "\n");
       setText(nextText)
-      props.alert("Converted to paragraphs", 'success')
+      props.alert && props.alert("Converted to paragraphs", 'success')
     }
   }
   return (
